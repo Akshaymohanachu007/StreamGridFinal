@@ -3,11 +3,6 @@ import WatchLater from "../models/WatchLater.js";
 import Favorite from "../models/Favorite.js";
 import Video from "../models/Video.js";
 
-// ==========================================
-// 1. WATCH HISTORY CONTROLLERS
-// ==========================================
-
-// Add or update watch history
 export const addHistory = async (req, res) => {
 
   try {
@@ -15,7 +10,6 @@ export const addHistory = async (req, res) => {
     const { videoId } = req.body;
 
     const userId = req.user._id;
-
 
     if (!videoId) {
 
@@ -26,13 +20,10 @@ export const addHistory = async (req, res) => {
 
     }
 
-
-
-    // Check video exists
+    
 
     const video =
       await Video.findById(videoId);
-
 
     if (!video) {
 
@@ -45,9 +36,7 @@ export const addHistory = async (req, res) => {
 
     }
 
-
-
-    // Add or update history
+    
 
     const history =
       await History.findOneAndUpdate(
@@ -57,11 +46,9 @@ export const addHistory = async (req, res) => {
           videoId
         },
 
-
         {
           watchedAt: new Date()
         },
-
 
         {
           upsert: true,
@@ -70,10 +57,7 @@ export const addHistory = async (req, res) => {
 
       );
 
-
-
-
-    // 🔥 Update video analytics
+    
 
     await Video.findByIdAndUpdate(
 
@@ -93,8 +77,6 @@ export const addHistory = async (req, res) => {
 
     );
 
-
-
     res.status(200).json({
 
       success: true,
@@ -102,8 +84,6 @@ export const addHistory = async (req, res) => {
       data: history
 
     });
-
-
 
   }
 
@@ -119,10 +99,8 @@ export const addHistory = async (req, res) => {
 
   }
 
-
 };
 
-// Get user's watch history (paginated & sorted)
 export const getHistory = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -137,7 +115,7 @@ export const getHistory = async (req, res) => {
       .skip(skip)
       .limit(limit);
 
-    // Filter out entries where video might have been deleted from DB
+    
     const validItems = historyItems.filter(item => item.videoId != null);
 
     res.status(200).json({
@@ -153,7 +131,6 @@ export const getHistory = async (req, res) => {
   }
 };
 
-// Delete single history item
 export const deleteHistoryItem = async (req, res) => {
   try {
     const { id } = req.params;
@@ -170,7 +147,6 @@ export const deleteHistoryItem = async (req, res) => {
   }
 };
 
-// Clear all watch history for user
 export const clearHistory = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -181,11 +157,6 @@ export const clearHistory = async (req, res) => {
   }
 };
 
-// ==========================================
-// 2. WATCH LATER CONTROLLERS
-// ==========================================
-
-// Toggle Watch Later status
 export const toggleWatchLater = async (req, res) => {
   try {
     const { videoId } = req.body;
@@ -201,7 +172,7 @@ export const toggleWatchLater = async (req, res) => {
       return res.status(200).json({ success: true, isWatchLater: false, message: "Removed from Watch Later" });
     }
 
-    // Check if video exists
+    
     const video = await Video.findById(videoId);
     if (!video) {
       return res.status(404).json({ success: false, message: "Video not found" });
@@ -214,7 +185,6 @@ export const toggleWatchLater = async (req, res) => {
   }
 };
 
-// Get Watch Later listing
 export const getWatchLater = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -244,11 +214,6 @@ export const getWatchLater = async (req, res) => {
   }
 };
 
-// ==========================================
-// 3. FAVORITES CONTROLLERS
-// ==========================================
-
-// Toggle Favorite status
 export const toggleFavorite = async (req, res) => {
   try {
     const { videoId } = req.body;
@@ -264,7 +229,7 @@ export const toggleFavorite = async (req, res) => {
       return res.status(200).json({ success: true, isFavorite: false, message: "Removed from Favorites" });
     }
 
-    // Check if video exists
+    
     const video = await Video.findById(videoId);
     if (!video) {
       return res.status(404).json({ success: false, message: "Video not found" });
@@ -277,7 +242,6 @@ export const toggleFavorite = async (req, res) => {
   }
 };
 
-// Get Favorites list
 export const getFavorites = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -307,7 +271,6 @@ export const getFavorites = async (req, res) => {
   }
 };
 
-// Check interactive status for a video (Favorites, Watch Later, and Playlists containing it)
 export const checkVideoStatus = async (req, res) => {
   try {
     const { videoId } = req.params;

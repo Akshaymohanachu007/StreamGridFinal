@@ -14,7 +14,7 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
 
   const { isAuthenticated } = useAuth();
 
-  // Save to watch history on mount if user is authenticated and we have the MongoDB _id
+  
   useEffect(() => {
     if (isAuthenticated && contentData?._id) {
       const recordHistory = async () => {
@@ -28,7 +28,7 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
     }
   }, [contentData?._id, isAuthenticated]);
 
-  // Fetch Up Next videos from our own backend
+  
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
@@ -39,7 +39,7 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
 
         if (json.success && Array.isArray(json.data)) {
           const recs = json.data
-            .filter(v => v.youtubeVideoId !== videoId) // exclude current video
+            .filter(v => v.youtubeVideoId !== videoId) 
             .slice(0, 6)
             .map(v => ({
               id: v._id,
@@ -71,10 +71,10 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
     <div className="w-full h-full bg-[#050505] text-slate-50 font-sans">
       <div className="max-w-[1800px] mx-auto grid grid-cols-1 xl:grid-cols-12 gap-8 p-4 lg:p-8">
 
-        {/* Left: Player + Info */}
+        
         <div className="xl:col-span-8 space-y-6">
 
-          {/* Video Player */}
+          
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/30 to-blue-600/30 blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000" />
             <div className="relative aspect-video rounded-3xl overflow-hidden bg-black border border-white/10 shadow-2xl">
@@ -99,9 +99,7 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
             </div>
           </div>
 
-
-
-          {/* Video Info */}
+          
           <div className="px-2">
             <h1 className="text-2xl lg:text-3xl font-bold mb-4 text-white leading-tight">
               {contentData?.title}
@@ -137,7 +135,7 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
               </div>
             </div>
 
-            {/* Description */}
+            
             {contentData?.description && (
               <div className="mt-6 p-4 bg-zinc-900/40 rounded-2xl border border-white/5 text-sm leading-relaxed text-zinc-300">
                 {contentData.description}
@@ -146,7 +144,7 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
           </div>
         </div>
 
-        {/* Right: Up Next */}
+        
         <div className="xl:col-span-4">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
             <span className="w-1.5 h-6 bg-purple-600 rounded-full" />
@@ -196,7 +194,7 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
         </div>
       </div>
 
-      {/* Share Modal */}
+      
       <ShareModal
         open={showShareModal}
         setOpen={setShowShareModal}

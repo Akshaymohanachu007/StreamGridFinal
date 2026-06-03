@@ -56,7 +56,7 @@ const SearchResults = () => {
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-white">
 
-      {/* Sticky Header Bar */}
+      
       <div className="sticky top-0 bg-[#0f0f0f]/95 backdrop-blur-md border-b border-white/10 z-40">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -83,7 +83,7 @@ const SearchResults = () => {
         </div>
       </div>
 
-      {/* Error / Warning Banner */}
+      
       {error && (
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4 text-yellow-300">
@@ -92,7 +92,7 @@ const SearchResults = () => {
         </div>
       )}
 
-      {/* Results Grid */}
+      
       <div className="max-w-7xl mx-auto px-4 pb-8 pt-4">
         {videos.length === 0 && !loading ? (
           <div className="flex flex-col items-center justify-center py-20">

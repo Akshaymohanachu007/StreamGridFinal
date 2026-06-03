@@ -15,14 +15,14 @@ const VideoSection = ({ videos, title }) => {
       min-h-[50vh]
     ">
 
-      {/* Optional Section Title */}
+      
       {title && (
         <h2 className="text-white text-xl font-bold mb-5 flex items-center gap-2">
           {title}
         </h2>
       )}
 
-      {/* Empty State */}
+      
       {(!videos || videos.length === 0) ? (
         <div className="flex flex-col items-center justify-center py-20">
           <svg className="w-20 h-20 text-zinc-700 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -10,7 +10,6 @@ import {
   fetchCategories,
 } from "../services/categoryService";
 
-
 function CategoryScrollingbar() {
 
   const [categories, setCategories] =
@@ -18,7 +17,7 @@ function CategoryScrollingbar() {
 
   const location = useLocation();
 
-  // Extract current slug from path like /category/music
+  
   const currentSlug = location.pathname.startsWith("/category/")
     ? location.pathname.split("/category/")[1]
     : null;
@@ -64,7 +63,7 @@ function CategoryScrollingbar() {
       "
     >
 
-      {/* ALL */}
+      
       <Link to="/">
         <button
           className={`
@@ -86,7 +85,7 @@ function CategoryScrollingbar() {
         </button>
       </Link>
 
-      {/* DYNAMIC CATEGORIES */}
+      
       {categories.map((category) => (
 
         <Link

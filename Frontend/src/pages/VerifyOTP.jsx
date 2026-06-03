@@ -13,7 +13,7 @@ function VerifyOTP() {
   const { verifyUserOTP } = useAuth();
   const navigate = useNavigate();
 
-  // Timer for Resend Code button
+  
   useEffect(() => {
     if (resendTimer > 0) {
       const timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
@@ -26,11 +26,11 @@ function VerifyOTP() {
     if (isNaN(value)) return;
 
     const newOtp = [...otp];
-    // Take only the last character if user pastes/types multiple
+    
     newOtp[index] = value.substring(value.length - 1);
     setOtp(newOtp);
 
-    // Focus next input if a number is entered
+    
     if (value && index < 5) {
       inputRefs.current[index + 1].focus();
     }
@@ -40,13 +40,13 @@ function VerifyOTP() {
     if (e.key === "Backspace") {
       const newOtp = [...otp];
       
-      // If current input is empty, focus previous input and clear it
+      
       if (!otp[index] && index > 0) {
         inputRefs.current[index - 1].focus();
         newOtp[index - 1] = "";
         setOtp(newOtp);
       } else {
-        // Just clear current input
+        
         newOtp[index] = "";
         setOtp(newOtp);
       }
@@ -60,7 +60,7 @@ function VerifyOTP() {
 
     const newOtp = pasteData.split("");
     setOtp(newOtp);
-    // Focus last input
+    
     inputRefs.current[5].focus();
   };
 
@@ -77,10 +77,10 @@ function VerifyOTP() {
       setLoading(true);
       await verifyUserOTP(email, otpCode);
       
-      // Clear storage
+      
       localStorage.removeItem("verifyEmail");
       
-      // Navigate to homepage
+      
       navigate("/");
     } catch (err) {
       setError(
@@ -94,13 +94,13 @@ function VerifyOTP() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0d0d0f] px-4 font-sans antialiased relative overflow-hidden">
-      {/* Decorative background glow */}
+      
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-red-600/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 left-1/3 w-[250px] h-[250px] bg-purple-600/10 rounded-full blur-[80px] pointer-events-none"></div>
 
       <div className="bg-[#141416]/80 backdrop-blur-xl border border-white/5 p-8 rounded-2xl shadow-2xl w-full max-w-md relative z-10">
         
-        {/* StreamGrid Branding */}
+        
         <div className="flex justify-center mb-6">
           <div className="flex items-center gap-2">
             <span className="h-8 w-8 rounded-lg bg-gradient-to-tr from-red-600 to-purple-600 flex items-center justify-center font-bold text-white shadow-lg shadow-red-500/20">S</span>
@@ -157,7 +157,7 @@ function VerifyOTP() {
               onClick={() => {
                 setResendTimer(60);
                 setError("");
-                // Clear state
+                
                 setOtp(Array(6).fill(""));
                 inputRefs.current[0].focus();
               }}

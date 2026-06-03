@@ -32,10 +32,9 @@ const userSchema = new mongoose.Schema(
       default: "user",
     },
 
-
-    // ==========================
-    // OTP AUTHENTICATION FIELDS
-    // ==========================
+    
+    
+    
 
     isVerified: {
       type: Boolean,
@@ -52,18 +51,15 @@ const userSchema = new mongoose.Schema(
       default: null,
     },
 
-
   },
   {
     timestamps: true,
   }
 );
 
-
 const User = mongoose.model(
   "User",
   userSchema
 );
-
 
 export default User;

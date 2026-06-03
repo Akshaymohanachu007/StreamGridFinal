@@ -28,7 +28,6 @@ const playlistSchema = new mongoose.Schema(
   }
 );
 
-// Indexes for fast lookup
 playlistSchema.index({ userId: 1 });
 
 const Playlist = mongoose.model("Playlist", playlistSchema);

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import VideoPlayer from '../components/VideoPlayer';
 
-
 function Watchpage() {
   const location = useLocation();
   const { id } = useParams();
@@ -17,7 +16,7 @@ function Watchpage() {
         setLoading(true);
         const state = location.state;
 
-        // TV Show or Movie passed via router state (not from our DB)
+        
         if (state?.isTVShow && state?.showData) {
           setVideoData(state.showData);
           setYoutubeVideoId(id);
@@ -26,7 +25,7 @@ function Watchpage() {
           const match = state.movieData.trailerUrl?.match(/v=([^&]+)/);
           setYoutubeVideoId(match ? match[1] : '');
         } else if (id) {
-          // Fetch video from our backend by MongoDB _id
+          
           const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
           const response = await fetch(`${API_URL}/api/videos/${id}`);
           const json = await response.json();
@@ -34,7 +33,7 @@ function Watchpage() {
           if (json.success && json.data) {
             const video = json.data;
             setVideoData(video);
-            // Use the actual YouTube video ID stored in our DB
+            
             setYoutubeVideoId(video.youtubeVideoId);
           } else {
             setError('Video not found');
@@ -58,7 +57,7 @@ function Watchpage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans">
 
-      {/* Blurred background from video thumbnail */}
+      
       {videoData?.thumbnail?.high && (
         <div className="fixed inset-0 z-0">
           <img

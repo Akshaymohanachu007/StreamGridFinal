@@ -5,7 +5,6 @@ import { sendOTP } from "../services/emailService.js";
 
 export const registerUser = async (req, res) => {
 
-
     try {
 
         const {
@@ -15,11 +14,8 @@ export const registerUser = async (req, res) => {
 
         } = req.body;
 
-
-
         const exists =
             await User.findOne({ email });
-
 
         if (exists) {
 
@@ -31,27 +27,20 @@ export const registerUser = async (req, res) => {
 
         }
 
-
-
         const otp =
             Math.floor(
                 100000 +
                 Math.random() * 900000
             ).toString();
 
-
-
         const salt =
             await bcrypt.genSalt(10);
-
 
         const passwordHash =
             await bcrypt.hash(
                 password,
                 salt
             );
-
-
 
         await User.create({
 
@@ -68,11 +57,7 @@ export const registerUser = async (req, res) => {
 
         });
 
-
-
         await sendOTP(email, otp);
-
-
 
         res.json({
 
@@ -81,7 +66,6 @@ export const registerUser = async (req, res) => {
             message: "OTP sent to email"
 
         });
-
 
     }
 
@@ -158,9 +142,7 @@ export const verifyOTP = async (req, res) => {
 
         const { email, otp } = req.body;
 
-
         const user = await User.findOne({ email });
-
 
         if (!user) {
             return res.status(404).json({
@@ -168,7 +150,6 @@ export const verifyOTP = async (req, res) => {
                 message: "User not found"
             });
         }
-
 
         if (
             user.otp !== otp ||
@@ -182,16 +163,13 @@ export const verifyOTP = async (req, res) => {
 
         }
 
-
         user.isVerified = true;
 
         user.otp = undefined;
 
         user.otpExpires = undefined;
 
-
         await user.save();
-
 
         res.json({
 
@@ -206,7 +184,6 @@ export const verifyOTP = async (req, res) => {
             }
 
         });
-
 
     } catch (error) {
 

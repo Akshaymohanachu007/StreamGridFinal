@@ -23,7 +23,6 @@ import {
   fetchVideos,
 } from "../services/videoService";
 
-
 function CategoryPage() {
 
   const { slug } = useParams();
@@ -59,7 +58,7 @@ function CategoryPage() {
     loadVideos();
   }, [loadVideos]);
 
-  // Reset page when category changes
+  
   useEffect(() => {
     setPage(1);
     setSort("");
@@ -75,7 +74,7 @@ function CategoryPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Format category name from slug
+  
   const categoryName = slug
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -84,10 +83,10 @@ function CategoryPage() {
   return (
     <div className="bg-[#0f0f0f] min-h-screen">
 
-      {/* Category Bar */}
+      
       <CategoryScrollingbar />
 
-      {/* Category Header + Sort */}
+      
       <div className="flex items-center justify-between px-4 pt-6 pb-2 max-w-[1800px] mx-auto">
         <div>
           <h1 className="text-white text-2xl font-bold flex items-center gap-3">
@@ -104,7 +103,7 @@ function CategoryPage() {
         />
       </div>
 
-      {/* Video Grid */}
+      
       {loading ? (
         <div className="px-4 pb-8 pt-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 max-w-[1800px] mx-auto">
@@ -126,7 +125,7 @@ function CategoryPage() {
         <VideoSection videos={videos} />
       )}
 
-      {/* Pagination */}
+      
       {!loading && totalPages > 1 && (
         <div className="bg-[#0f0f0f] pb-8">
           <Pagination

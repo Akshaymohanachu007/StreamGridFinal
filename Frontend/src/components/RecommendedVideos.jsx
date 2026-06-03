@@ -20,11 +20,11 @@ const [videos,setVideos]=useState([]);
 useEffect(()=>{
 
 const token = localStorage.getItem("token");
-if (!token) return; // skip if not logged in
+if (!token) return; 
 
 fetchRecommendations()
 .then(setVideos)
-.catch(()=>{}); // silently ignore errors
+.catch(()=>{}); 
 
 
 },[]);

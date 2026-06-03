@@ -1,7 +1,6 @@
 import Playlist from "../models/Playlist.js";
 import Video from "../models/Video.js";
 
-// Create a new playlist
 export const createPlaylist = async (req, res) => {
   try {
     const { name, description } = req.body;
@@ -24,11 +23,10 @@ export const createPlaylist = async (req, res) => {
   }
 };
 
-// Get all playlists belonging to the user
 export const getPlaylists = async (req, res) => {
   try {
     const userId = req.user._id;
-    // We can also retrieve the video count per playlist
+    
     const playlists = await Playlist.find({ userId }).sort({ createdAt: -1 });
 
     res.status(200).json({ success: true, count: playlists.length, data: playlists });
@@ -37,7 +35,6 @@ export const getPlaylists = async (req, res) => {
   }
 };
 
-// Get a single playlist's details with fully populated videos
 export const getPlaylistById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -54,7 +51,6 @@ export const getPlaylistById = async (req, res) => {
   }
 };
 
-// Update playlist details (name/description)
 export const updatePlaylist = async (req, res) => {
   try {
     const { id } = req.params;
@@ -81,7 +77,6 @@ export const updatePlaylist = async (req, res) => {
   }
 };
 
-// Delete a playlist
 export const deletePlaylist = async (req, res) => {
   try {
     const { id } = req.params;
@@ -98,7 +93,6 @@ export const deletePlaylist = async (req, res) => {
   }
 };
 
-// Add a video to a playlist
 export const addVideoToPlaylist = async (req, res) => {
   try {
     const { id } = req.params;
@@ -109,7 +103,7 @@ export const addVideoToPlaylist = async (req, res) => {
       return res.status(400).json({ success: false, message: "Video ID is required" });
     }
 
-    // Check if video exists
+    
     const video = await Video.findById(videoId);
     if (!video) {
       return res.status(404).json({ success: false, message: "Video not found" });
@@ -120,7 +114,7 @@ export const addVideoToPlaylist = async (req, res) => {
       return res.status(404).json({ success: false, message: "Playlist not found" });
     }
 
-    // Check if video is already in the playlist
+    
     if (playlist.videos.includes(videoId)) {
       return res.status(400).json({ success: false, message: "Video is already in the playlist" });
     }
@@ -134,7 +128,6 @@ export const addVideoToPlaylist = async (req, res) => {
   }
 };
 
-// Remove a video from a playlist
 export const removeVideoFromPlaylist = async (req, res) => {
   try {
     const { id, videoId } = req.params;
@@ -145,7 +138,7 @@ export const removeVideoFromPlaylist = async (req, res) => {
       return res.status(404).json({ success: false, message: "Playlist not found" });
     }
 
-    // Filter out the videoId
+    
     playlist.videos = playlist.videos.filter(v => v.toString() !== videoId);
     await playlist.save();
 

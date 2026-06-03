@@ -12,7 +12,6 @@ import {
 
 const router = express.Router();
 
-// Apply auth protection middleware to all these routes
 router.use(protect);
 
 router.route("/")

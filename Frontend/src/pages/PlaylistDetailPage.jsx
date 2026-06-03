@@ -89,7 +89,7 @@ const PlaylistDetailPage = () => {
 
   const handlePlayAll = () => {
     if (playlist && playlist.videos.length > 0) {
-      // Play the first video in the playlist
+      
       navigate(`/video/${playlist.videos[0]._id}`);
     }
   };
@@ -117,7 +117,7 @@ const PlaylistDetailPage = () => {
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-slate-100 font-sans pb-16">
       
-      {/* Decorative blurred background from playlist's first video thumbnail */}
+      
       {playlist.videos.length > 0 && playlist.videos[0].thumbnail?.high && (
         <div className="fixed inset-0 z-0">
           <img
@@ -131,7 +131,7 @@ const PlaylistDetailPage = () => {
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 lg:px-8 pt-8">
         
-        {/* Breadcrumbs */}
+        
         <div className="mb-6">
           <Link to="/library" className="text-xs font-bold text-zinc-500 hover:text-purple-400 transition flex items-center gap-1">
             ← Back to Library
@@ -140,10 +140,10 @@ const PlaylistDetailPage = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left Panel: Playlist metadata */}
+          
           <div className="lg:col-span-4 bg-zinc-900/60 border border-white/5 rounded-3xl p-6 backdrop-blur-md shadow-2xl relative overflow-hidden">
             
-            {/* Playlist Header Icon Layer */}
+            
             <span className="absolute -bottom-10 -right-10 text-9xl opacity-[0.02] pointer-events-none select-none">📁</span>
             
             {!isEditing ? (
@@ -243,7 +243,7 @@ const PlaylistDetailPage = () => {
             )}
           </div>
 
-          {/* Right Panel: Video listings */}
+          
           <div className="lg:col-span-8 space-y-4">
             <h2 className="text-xl font-bold flex items-center gap-2">
               <span className="w-1.5 h-6 bg-purple-600 rounded-full" />
@@ -266,13 +266,13 @@ const PlaylistDetailPage = () => {
                     key={video._id}
                     className="group/item flex gap-4 p-3 bg-zinc-900/30 border border-white/5 hover:border-white/10 rounded-2xl hover:bg-zinc-900/50 transition cursor-pointer relative"
                   >
-                    {/* Index Number */}
+                    
                     <div className="flex items-center justify-center w-6 text-xs text-zinc-500 font-extrabold select-none">
                       {index + 1}
                     </div>
 
                     <Link to={`/video/${video._id}`} className="flex gap-4 min-w-0 flex-1 flex-col md:flex-row">
-                      {/* Video Thumbnail */}
+                      
                       <div className="w-full md:w-44 aspect-video rounded-xl overflow-hidden bg-zinc-800 shrink-0">
                         <img
                           src={video.thumbnail?.high || video.thumbnail?.medium || ""}
@@ -281,7 +281,7 @@ const PlaylistDetailPage = () => {
                         />
                       </div>
                       
-                      {/* Video Details */}
+                      
                       <div className="flex-1 min-w-0 pr-10 flex flex-col justify-center">
                         <h3 className="text-sm font-bold text-zinc-100 group-hover/item:text-purple-400 transition line-clamp-2 leading-tight">
                           {video.title}
@@ -291,7 +291,7 @@ const PlaylistDetailPage = () => {
                       </div>
                     </Link>
 
-                    {/* Delete button */}
+                    
                     <button
                       onClick={(e) => handleRemoveVideo(e, video._id)}
                       className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 text-zinc-500 hover:text-red-400 hover:bg-white/5 rounded-full transition opacity-0 group-hover/item:opacity-100"

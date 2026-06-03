@@ -23,24 +23,24 @@ const Library = () => {
   
   const [activeTab, setActiveTab] = useState("favorites");
   
-  // Data states
+  
   const [favorites, setFavorites] = useState([]);
   const [watchLater, setWatchLater] = useState([]);
   const [history, setHistory] = useState([]);
   const [playlists, setPlaylists] = useState([]);
   
-  // Loading and pagination
+  
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   
-  // Create Playlist modal/form state
+  
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newPlaylistName, setNewPlaylistName] = useState("");
   const [newPlaylistDesc, setNewPlaylistDesc] = useState("");
   const [modalLoading, setModalLoading] = useState(false);
 
-  // Load data based on active tab
+  
   const loadData = async (tab = activeTab, pageNum = 1) => {
     if (!isAuthenticated) return;
     try {
@@ -71,7 +71,7 @@ const Library = () => {
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
-      // Redirect to login if not authenticated
+      
       navigate("/login");
     } else {
       loadData(activeTab, page);
@@ -83,7 +83,7 @@ const Library = () => {
     setPage(1);
   };
 
-  // Remove operations
+  
   const handleRemoveFavorite = async (e, videoId) => {
     e.preventDefault();
     e.stopPropagation();
@@ -156,7 +156,7 @@ const Library = () => {
     }
   };
 
-  // Helper to format history relative dates
+  
   const formatWatchedTime = (dateString) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -184,7 +184,7 @@ const Library = () => {
     <div className="min-h-screen bg-[#0f0f0f] text-slate-100 font-sans pb-16">
       <div className="max-w-[1800px] mx-auto px-4 lg:px-8 pt-8">
         
-        {/* Header */}
+        
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-purple-400 bg-clip-text text-transparent">
@@ -217,7 +217,7 @@ const Library = () => {
           )}
         </div>
 
-        {/* Tab Navigation */}
+        
         <div className="flex border-b border-white/5 mb-8 overflow-x-auto hide-scrollbar gap-2">
           {[
             { id: "favorites", label: "Liked", icon: "♥" },
@@ -240,7 +240,7 @@ const Library = () => {
           ))}
         </div>
 
-        {/* Content Area */}
+        
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 mt-4">
             {[...Array(8)].map((_, i) => (
@@ -258,7 +258,7 @@ const Library = () => {
           </div>
         ) : (
           <div>
-            {/* LIKED / FAVORITES TAB */}
+            
             {activeTab === "favorites" && (
               favorites.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -284,7 +284,7 @@ const Library = () => {
               )
             )}
 
-            {/* WATCH LATER TAB */}
+            
             {activeTab === "watch-later" && (
               watchLater.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -310,7 +310,7 @@ const Library = () => {
               )
             )}
 
-            {/* PLAYLISTS TAB */}
+            
             {activeTab === "playlists" && (
               playlists.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -326,7 +326,7 @@ const Library = () => {
                       key={playlist._id}
                       className="group p-5 bg-zinc-900/40 border border-white/5 rounded-2xl hover:border-purple-600/30 hover:bg-zinc-900/80 transition shadow-xl flex flex-col justify-between min-h-[160px] relative overflow-hidden"
                     >
-                      {/* Decorative Background Icon */}
+                      
                       <span className="absolute -bottom-8 -right-8 text-8xl opacity-[0.03] select-none pointer-events-none group-hover:scale-110 transition duration-500">📁</span>
                       
                       <div>
@@ -356,7 +356,7 @@ const Library = () => {
               )
             )}
 
-            {/* WATCH HISTORY TAB */}
+            
             {activeTab === "history" && (
               history.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -372,7 +372,7 @@ const Library = () => {
                       className="group flex flex-col md:flex-row gap-4 p-3 bg-zinc-900/30 border border-white/5 hover:border-white/10 rounded-2xl hover:bg-zinc-900/50 transition cursor-pointer relative"
                       onClick={() => navigate(`/video/${item.videoId._id}`)}
                     >
-                      {/* Video Thumbnail */}
+                      
                       <div className="w-full md:w-56 aspect-video rounded-xl overflow-hidden bg-zinc-800 shrink-0 relative">
                         <img
                           src={item.videoId.thumbnail?.high || item.videoId.thumbnail?.medium || ""}
@@ -381,7 +381,7 @@ const Library = () => {
                         />
                       </div>
                       
-                      {/* Video Info */}
+                      
                       <div className="flex-1 min-w-0 pr-10 flex flex-col justify-between">
                         <div>
                           <h3 className="text-base font-bold text-zinc-100 group-hover:text-purple-400 transition line-clamp-2 leading-tight">
@@ -397,7 +397,7 @@ const Library = () => {
                         </div>
                       </div>
 
-                      {/* Remove Button */}
+                      
                       <button
                         onClick={(e) => handleRemoveHistory(e, item._id)}
                         className="absolute right-4 top-4 p-2 text-zinc-500 hover:text-white hover:bg-white/5 rounded-full transition"
@@ -411,7 +411,7 @@ const Library = () => {
               )
             )}
 
-            {/* Pagination Controls */}
+            
             {totalPages > 1 && (
               <div className="flex justify-center items-center gap-3 mt-10">
                 <button
@@ -435,7 +435,7 @@ const Library = () => {
         )}
       </div>
 
-      {/* Create Playlist Modal */}
+      
       {showCreateModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="w-full max-w-md bg-[#18181b] border border-white/10 rounded-2xl shadow-2xl p-6 relative">

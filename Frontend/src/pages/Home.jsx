@@ -60,7 +60,7 @@ function Home() {
 
   const handleSortChange = (newSort) => {
     setSort(newSort);
-    setPage(1); // Reset to page 1 when sort changes
+    setPage(1); 
   };
 
   const handlePageChange = (newPage) => {
@@ -71,13 +71,13 @@ function Home() {
   return (
     <div className="bg-[#0f0f0f] min-h-screen">
 
-      {/* Category Bar */}
+      
       <CategoryScrollingbar />
 
-      {/* Trending Section */}
+      
       <TrendingSection />
 
-      {/* Divider */}
+      
       <div className="px-4">
         <div className="h-px bg-white/5" />
       </div>
@@ -88,7 +88,7 @@ function Home() {
 
       </div>
 
-      {/* Sort Controls */}
+      
       <div className="flex items-center justify-between px-4 pt-6 pb-2 max-w-[1800px] mx-auto">
         <h2 className="text-white text-lg font-bold flex items-center gap-2">
           <svg className="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
@@ -103,7 +103,7 @@ function Home() {
         />
       </div>
 
-      {/* Video Grid */}
+      
       {loading ? (
         <div className="px-4 pb-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 max-w-[1800px] mx-auto">
@@ -125,7 +125,7 @@ function Home() {
         <VideoSection videos={videos} />
       )}
 
-      {/* Pagination */}
+      
       {!loading && totalPages > 1 && (
         <div className="bg-[#0f0f0f] pb-8">
           <Pagination

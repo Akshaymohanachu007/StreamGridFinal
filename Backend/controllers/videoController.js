@@ -153,36 +153,28 @@ export const getTrendingVideos = async (req, res) => {
 
   try {
 
-
-    // get all videos
+    
 
     const videos =
     await Video.find();
 
-
-
-    // update scores
+    
 
     for (const video of videos) {
-
 
       const newScore =
       calculateTrendingScore(
         video
       );
 
-
       video.trendingScore =
       newScore;
-
 
       await video.save();
 
     }
 
-
-
-    // return highest ranked
+    
 
     const trending =
     await Video.find()
@@ -192,8 +184,6 @@ export const getTrendingVideos = async (req, res) => {
     })
 
     .limit(20);
-
-
 
     res.json({
 
@@ -205,12 +195,9 @@ export const getTrendingVideos = async (req, res) => {
 
     });
 
-
-
   }
 
   catch(error){
-
 
     res.status(500).json({
 
@@ -220,8 +207,6 @@ export const getTrendingVideos = async (req, res) => {
 
     });
 
-
   }
-
 
 };

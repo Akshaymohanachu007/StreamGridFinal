@@ -75,7 +75,7 @@ const TrendingSection = () => {
   return (
     <div className="px-4 py-6 relative">
 
-      {/* Section Header */}
+      
       <div className="flex items-center gap-3 mb-5">
         <div className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30 rounded-full">
           <span className="text-lg">🔥</span>
@@ -86,10 +86,10 @@ const TrendingSection = () => {
         <div className="flex-1 h-px bg-gradient-to-r from-orange-500/30 to-transparent" />
       </div>
 
-      {/* Scroll Container */}
+      
       <div className="relative group">
 
-        {/* Left Arrow */}
+        
         {canScrollLeft && (
           <button
             onClick={() => scroll("left")}
@@ -109,7 +109,7 @@ const TrendingSection = () => {
           </button>
         )}
 
-        {/* Right Arrow */}
+        
         {canScrollRight && (
           <button
             onClick={() => scroll("right")}
@@ -129,7 +129,7 @@ const TrendingSection = () => {
           </button>
         )}
 
-        {/* Videos Row */}
+        
         <div
           ref={scrollContainerRef}
           className="flex gap-4 overflow-x-auto hide-scrollbar scroll-smooth pb-2"
@@ -140,28 +140,28 @@ const TrendingSection = () => {
               key={video._id || index}
               className="flex-shrink-0 w-72 group/card"
             >
-              {/* Thumbnail */}
+              
               <div className="relative aspect-video rounded-xl overflow-hidden bg-zinc-800">
                 <img
                   src={video.thumbnail?.high || video.thumbnail?.medium || ""}
                   alt={video.title}
                   className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
                 />
-                {/* Gradient Overlay */}
+                
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
 
-                {/* Trending Rank Badge */}
+                
                 <div className="absolute top-2 left-2 flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm border border-orange-500/30">
                   <span className="text-orange-400 text-xs font-bold">#{index + 1}</span>
                 </div>
 
-                {/* Views Badge */}
+                
                 <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-xs text-white font-medium">
                   {video.views?.toLocaleString() || 0} views
                 </div>
               </div>
 
-              {/* Info */}
+              
               <div className="mt-3">
                 <h3 className="text-sm font-semibold text-white line-clamp-2 leading-tight group-hover/card:text-purple-300 transition-colors">
                   {video.title}

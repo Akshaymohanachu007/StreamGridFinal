@@ -47,7 +47,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
     loadStatuses();
   }, [videoId, isAuthenticated]);
 
-  // Click outside to close playlist dropdown
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -91,7 +91,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
       return;
     }
     setShowPlaylistDropdown(!showPlaylistDropdown);
-    // Reload playlists dynamically
+    
     try {
       const playlistData = await fetchPlaylists();
       setPlaylists(playlistData);
@@ -136,7 +136,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
       const res = await createPlaylistApi(newPlaylistName.trim(), newPlaylistDesc.trim());
       const newPlaylist = res.data;
       
-      // Automatically add current video to the newly created playlist
+      
       await addVideoToPlaylistApi(newPlaylist._id, videoId);
       newPlaylist.videos.push(videoId);
 
@@ -153,7 +153,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
 
   return (
     <div className="flex items-center gap-2 bg-zinc-900/50 p-1.5 rounded-full border border-white/5 backdrop-blur-md relative" ref={dropdownRef}>
-      {/* Favorite / Like Button */}
+      
       <button
         onClick={handleFavoriteToggle}
         className={`flex items-center gap-2 px-5 py-2 rounded-full transition duration-300 font-sans font-medium text-sm ${
@@ -169,7 +169,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
 
       <div className="w-px h-6 bg-white/10" />
 
-      {/* Watch Later Button */}
+      
       <button
         onClick={handleWatchLaterToggle}
         className={`flex items-center gap-2 px-5 py-2 rounded-full transition duration-300 font-sans font-medium text-sm ${
@@ -187,7 +187,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
 
       <div className="w-px h-6 bg-white/10" />
 
-      {/* Playlist Button */}
+      
       <button
         onClick={handlePlaylistClick}
         className={`flex items-center gap-2 px-5 py-2 rounded-full hover:bg-white/10 transition duration-300 font-sans font-medium text-sm text-zinc-300 ${
@@ -201,7 +201,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
         <span>Save</span>
       </button>
 
-      {/* Playlist Dropdown */}
+      
       {showPlaylistDropdown && (
         <div className="absolute left-0 lg:left-auto lg:right-0 top-full mt-3 w-72 bg-[#18181b] border border-white/10 rounded-2xl shadow-2xl p-4 z-50 font-sans text-slate-100 backdrop-blur-xl bg-opacity-95">
           <h4 className="text-sm font-bold text-white mb-3 flex items-center justify-between">
@@ -214,7 +214,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
             </button>
           </h4>
 
-          {/* Playlist Choices */}
+          
           <div className="max-h-48 overflow-y-auto space-y-2.5 mb-3 pr-1 hide-scrollbar">
             {playlists.length === 0 ? (
               <p className="text-zinc-500 text-xs italic py-2">No playlists created yet.</p>
@@ -242,7 +242,7 @@ const InteractionButtons = ({ videoId, videoTitle }) => {
             )}
           </div>
 
-          {/* Action to show Create Form */}
+          
           {!showCreateForm ? (
             <button
               onClick={() => setShowCreateForm(true)}

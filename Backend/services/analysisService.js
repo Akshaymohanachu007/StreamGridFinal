@@ -28,7 +28,7 @@ export const updateUserPattern =
         }
 
 
-        // category learning
+        
 
         pref.categories.push({
 
@@ -39,7 +39,7 @@ export const updateUserPattern =
         });
 
 
-        // tag learning
+        
 
         video.tags.forEach(tag => {
 

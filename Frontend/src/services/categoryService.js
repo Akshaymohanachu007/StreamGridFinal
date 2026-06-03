@@ -1,6 +1,5 @@
 import api from "../lib/api";
 
-
 export const fetchCategories = async () => {
   try {
     const response = await api.get("/categories");

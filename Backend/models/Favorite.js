@@ -18,7 +18,6 @@ const favoriteSchema = new mongoose.Schema(
   }
 );
 
-// Compound index to ensure a video is favorited once per user
 favoriteSchema.index({ userId: 1, videoId: 1 }, { unique: true });
 
 const Favorite = mongoose.model("Favorite", favoriteSchema);

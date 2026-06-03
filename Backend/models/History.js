@@ -22,7 +22,6 @@ const historySchema = new mongoose.Schema(
   }
 );
 
-// Compound index to quickly find and update history entries
 historySchema.index({ userId: 1, videoId: 1 });
 historySchema.index({ userId: 1, watchedAt: -1 });
 

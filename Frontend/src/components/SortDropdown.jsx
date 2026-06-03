@@ -13,7 +13,7 @@ const SortDropdown = ({ currentSort = "", onSortChange }) => {
   const currentLabel =
     sortOptions.find((opt) => opt.value === currentSort)?.label || "Relevance";
 
-  // Close on outside click
+  
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -27,7 +27,7 @@ const SortDropdown = ({ currentSort = "", onSortChange }) => {
   return (
     <div className="relative" ref={dropdownRef}>
 
-      {/* Trigger Button */}
+      
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`
@@ -39,7 +39,7 @@ const SortDropdown = ({ currentSort = "", onSortChange }) => {
           }
         `}
       >
-        {/* Sort Icon */}
+        
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
             d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
@@ -48,7 +48,7 @@ const SortDropdown = ({ currentSort = "", onSortChange }) => {
 
         <span>Sort: {currentLabel}</span>
 
-        {/* Chevron */}
+        
         <svg
           className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
           fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -57,7 +57,7 @@ const SortDropdown = ({ currentSort = "", onSortChange }) => {
         </svg>
       </button>
 
-      {/* Dropdown Menu */}
+      
       {isOpen && (
         <div className="
           absolute right-0 mt-2 w-48 py-1

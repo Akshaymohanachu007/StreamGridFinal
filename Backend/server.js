@@ -24,7 +24,7 @@ const app = express();
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, etc.)
+    
     if (!origin) return callback(null, true);
 
     const allowedOrigins = [
@@ -32,7 +32,7 @@ app.use(cors({
       "https://stream-grid-final.vercel.app",
     ];
 
-    // Allow any Vercel preview deployment automatically
+    
     if (
       allowedOrigins.includes(origin) ||
       /\.vercel\.app$/.test(origin)
@@ -60,7 +60,7 @@ app.use("/api/playlists", playlistRoutes);
 
 app.use("/api/recommendations", recommendationRoutes);
 
-// Error Handling Middleware
+
 app.use((err, req, res, next) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   res.status(statusCode).json({
@@ -71,7 +71,7 @@ app.use((err, req, res, next) => {
 });
 
 
-// Schedule daily sync at midnight
+
 cron.schedule("0 0 * * *", async () => {
   console.log("Running daily sync...");
   await syncTrendingVideosToDB();
@@ -79,13 +79,13 @@ cron.schedule("0 0 * * *", async () => {
 
 const PORT = process.env.PORT || 5000;
 
-// Start server only after DB connects
+
 const startServer = async () => {
-  await connectDb(); // wait for MongoDB connection before anything else
+  await connectDb(); 
   app.listen(PORT, () => {
     console.log(`Server running at Port: ${PORT}`);
   });
-  // Initial sync AFTER DB is connected
+  
   syncTrendingVideosToDB();
 };
 

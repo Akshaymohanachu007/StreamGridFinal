@@ -59,7 +59,7 @@ export default function ShareModal({ open, setOpen, videoUrl, videoTitle }) {
             transition
             className="relative transform overflow-hidden rounded-2xl bg-[#1a1a1a] text-left shadow-2xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:w-full sm:max-w-md"
           >
-            {/* Header */}
+            
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <DialogTitle as="h3" className="text-lg font-semibold text-white flex items-center gap-2">
                 <ShareIcon className="w-5 h-5 text-purple-400" />

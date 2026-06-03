@@ -11,7 +11,7 @@ export const getRecommendations = async (req, res) => {
         const userId = req.user._id;
 
 
-        // Get last watched videos
+        
 
         const history =
             await History.find({
@@ -44,7 +44,7 @@ export const getRecommendations = async (req, res) => {
 
 
 
-        // collect user interests
+        
 
 
         const categories = [];
@@ -83,7 +83,7 @@ export const getRecommendations = async (req, res) => {
 
 
 
-        // Find similar videos
+        
 
 
         const recommendations =

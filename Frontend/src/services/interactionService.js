@@ -1,6 +1,5 @@
 import api from "../lib/api";
 
-// 1. WATCH HISTORY SERVICES
 export const addToHistory = async (videoId) => {
   const response = await api.post("/history", { videoId });
   return response.data;
@@ -27,7 +26,6 @@ export const clearAllHistory = async () => {
   return response.data;
 };
 
-// 2. WATCH LATER SERVICES
 export const toggleWatchLaterApi = async (videoId) => {
   const response = await api.post("/watch-later", { videoId });
   return response.data;
@@ -44,7 +42,6 @@ export const fetchWatchLater = async (page = 1, limit = 12) => {
   };
 };
 
-// 3. FAVORITES SERVICES
 export const toggleFavoriteApi = async (videoId) => {
   const response = await api.post("/favorites", { videoId });
   return response.data;
@@ -61,7 +58,6 @@ export const fetchFavorites = async (page = 1, limit = 12) => {
   };
 };
 
-// Check video status (favorite & watch later) for a single video
 export const fetchVideoStatus = async (videoId) => {
   const response = await api.get(`/status/${videoId}`);
   return response.data;

@@ -11,7 +11,6 @@ import {
   useAuth,
 } from "../contexts/AuthContext";
 
-
 function Login() {
 
   const navigate =
@@ -28,7 +27,6 @@ function Login() {
 
   const [error, setError] =
     useState("");
-
 
   const handleSubmit =
     async (e) => {
@@ -52,7 +50,6 @@ function Login() {
         );
       }
     };
-
 
   return (
     <div className="

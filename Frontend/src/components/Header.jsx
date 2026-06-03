@@ -5,7 +5,6 @@ import { useAuth } from '../contexts/AuthContext';
 import SearchBar from './SearchBar';
 import VoiceSearch from './VoiceSearch';
 
-
 const Header = () => {
 
   const { user, logout, isAuthenticated } = useAuth();
@@ -28,8 +27,6 @@ const Header = () => {
   const handleVoiceSearchResult = (query) => {
     handleSearch(query);
   };
-
-
 
   const handleLogout = () => {
     logout();
@@ -68,13 +65,13 @@ const Header = () => {
         </Link>
       </div>
 
-      {/* Search Bar  */}
+      
       <div className="flex flex-grow justify-center items-center mx-2 sm:mx-4 lg:mx-10 max-w-2xl">
         <div className="flex-grow">
           <SearchBar onSearch={handleSearch} placeholder="Search..." />
         </div>
 
-        {/* Voice Search Button */}
+        
         <button
           onClick={handleVoiceSearch}
           className="ml-2 p-2.5 bg-[#1f1f1f] hover:bg-[#3f3f3f] rounded-full transition-colors flex-shrink-0"
@@ -88,8 +85,7 @@ const Header = () => {
 
       <div className="flex items-center space-x-2 relative">
 
-
-        {/* Auth Buttons (shown when logged out) */}
+        
         {!isAuthenticated && (
           <div className="flex items-center gap-2">
             <Link
@@ -107,7 +103,7 @@ const Header = () => {
           </div>
         )}
 
-        {/* Profile / User Menu (shown when logged in) */}
+        
         {isAuthenticated && (
           <div className="relative">
             <button
@@ -155,8 +151,6 @@ const Header = () => {
           onSearch={handleVoiceSearchResult}
         />
       )}
-
-
 
     </header>
   );

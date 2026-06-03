@@ -12,9 +12,7 @@ import {
   verifyOTP,
 } from "../services/authService";
 
-
 const AuthContext = createContext();
-
 
 export const AuthProvider = ({ children }) => {
 
@@ -22,8 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
 
-
-  // LOAD CURRENT USER on mount / token change
+  
   useEffect(() => {
     const loadUser = async () => {
       if (!token) {
@@ -43,8 +40,7 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, [token]);
 
-
-  // LOGIN — sets token + user immediately
+  
   const login = async (email, password) => {
     const data = await loginUser({ email, password });
     localStorage.setItem("token", data.token);
@@ -53,16 +49,14 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
-
-  // REGISTER — only sends OTP; does NOT log the user in yet
+  
   const register = async (username, email, password) => {
     const data = await registerUser({ username, email, password });
-    // Don't set token/user here — user must verify OTP first
+    
     return data;
   };
 
-
-  // VERIFY OTP — called from VerifyOTP page; logs the user in on success
+  
   const verifyUserOTP = async (email, otp) => {
     const data = await verifyOTP({ email, otp });
     localStorage.setItem("token", data.token);
@@ -71,14 +65,12 @@ export const AuthProvider = ({ children }) => {
     return data;
   };
 
-
-  // LOGOUT
+  
   const logout = () => {
     localStorage.removeItem("token");
     setToken(null);
     setUser(null);
   };
-
 
   return (
     <AuthContext.Provider
@@ -97,6 +89,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
 
 export const useAuth = () => useContext(AuthContext);

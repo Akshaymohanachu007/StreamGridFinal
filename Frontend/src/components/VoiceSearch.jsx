@@ -89,7 +89,6 @@ const VoiceSearch = ({ onSearch, isOpen, onClose }) => {
         )}
       </div>
 
-
       <div className="bg-black/30 rounded-lg p-3 border border-white/10 min-h-[60px]">
         <p className="text-gray-300 text-sm">
           {transcript || (

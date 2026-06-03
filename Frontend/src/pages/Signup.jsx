@@ -11,7 +11,6 @@ import {
   useAuth,
 } from "../contexts/AuthContext";
 
-
 function Signup() {
 
   const navigate =
@@ -39,7 +38,6 @@ function Signup() {
   const [loading, setLoading] =
     useState(false);
 
-
   const handleSubmit =
     async (e) => {
 
@@ -47,7 +45,7 @@ function Signup() {
 
       setError("");
 
-      // PASSWORD MATCH CHECK
+      
       if (
         password !== confirmPassword
       ) {
@@ -66,7 +64,7 @@ function Signup() {
           password
         );
 
-        // Save email so VerifyOTP page knows who to verify
+        
         localStorage.setItem("verifyEmail", email);
 
         navigate("/verify-otp");
@@ -83,7 +81,6 @@ function Signup() {
         setLoading(false);
       }
     };
-
 
   return (
     <div className="
@@ -134,7 +131,7 @@ function Signup() {
           </div>
         )}
 
-        {/* USERNAME */}
+        
         <div className="mb-4">
 
           <label className="
@@ -169,7 +166,7 @@ function Signup() {
           />
         </div>
 
-        {/* EMAIL */}
+        
         <div className="mb-4">
 
           <label className="
@@ -204,7 +201,7 @@ function Signup() {
           />
         </div>
 
-        {/* PASSWORD */}
+        
         <div className="mb-4">
 
           <label className="
@@ -239,7 +236,7 @@ function Signup() {
           />
         </div>
 
-        {/* CONFIRM PASSWORD */}
+        
         <div className="mb-6">
 
           <label className="
@@ -276,7 +273,7 @@ function Signup() {
           />
         </div>
 
-        {/* BUTTON */}
+        
         <button
           type="submit"
           disabled={loading}
@@ -299,7 +296,7 @@ function Signup() {
 
         </button>
 
-        {/* LOGIN LINK */}
+        
         <p className="
           text-gray-400
           text-sm

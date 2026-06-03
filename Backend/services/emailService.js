@@ -2,8 +2,8 @@ import nodemailer from "nodemailer";
 
 export const sendOTP = async (email, otp) => {
 
-  // Create transporter here (not at module level) so that
-  // process.env values are read AFTER dotenv.config() has run.
+  
+  
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {

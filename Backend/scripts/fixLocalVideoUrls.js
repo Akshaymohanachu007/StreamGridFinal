@@ -11,7 +11,7 @@ async function fixVideoUrls() {
   await mongoose.connect(process.env.MONGO_URI);
   console.log("✅ Connected to MongoDB");
 
-  // Find all videos with localVideoPath containing localhost
+  
   const videos = await Video.find({
     localVideoPath: { $regex: "localhost", $options: "i" },
   });
