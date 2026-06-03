@@ -33,7 +33,8 @@ function VideoPlayer({ videoId, contentType = 'video', contentData }) {
     const fetchRecommendations = async () => {
       try {
         setLoadingRecommendations(true);
-        const response = await fetch('http://localhost:5000/api/videos?limit=8&page=1');
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const response = await fetch(`${API_URL}/api/videos?limit=8&page=1`);
         const json = await response.json();
 
         if (json.success && Array.isArray(json.data)) {
