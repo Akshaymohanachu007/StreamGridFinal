@@ -22,13 +22,15 @@ dotenv.config()
 
 const app = express();
 
-app.use(cors({
+app.use(
+  cors({
     origin: [
-        "http://localhost:5173",
-        "https://your-vercel-app.vercel.app"
+      "https://stream-grid-final.vercel.app",
+      "http://localhost:5173"
     ],
-    credentials: true
-}));
+    credentials: true,
+  })
+);
 app.use(express.json())
 
 app.get("/", (req, res) => {

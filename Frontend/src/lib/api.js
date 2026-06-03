@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://streamgridfinal.onrender.com/api",
 });
 
 // Automatically inject JWT token into request headers
