@@ -23,11 +23,25 @@ dotenv.config()
 const app = express();
 
 app.use(cors({
-  origin: [
-    "https://stream-grid-final.vercel.app",
-    "https://stream-grid-final-6cnxftdal-akshaymohanachu007s-projects.vercel.app",
-    "http://localhost:5173"
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "https://stream-grid-final.vercel.app",
+    ];
+
+    // Allow any Vercel preview deployment automatically
+    if (
+      allowedOrigins.includes(origin) ||
+      /\.vercel\.app$/.test(origin)
+    ) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true,
 }));
 app.use(express.json())
