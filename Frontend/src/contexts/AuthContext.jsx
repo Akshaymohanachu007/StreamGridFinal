@@ -32,7 +32,12 @@ export const AuthProvider = ({ children }) => {
         setUser(data.user);
       } catch (error) {
         console.error("Failed to load user:", error);
-        if (error.response?.status === 401) logout();
+        // Clear stale/invalid token on auth-related errors:
+        // 401 = bad/expired token, 404 = user deleted, 500 = crash from null user
+        const status = error.response?.status;
+        if (status === 401 || status === 404 || status === 500) {
+          logout();
+        }
       } finally {
         setLoading(false);
       }
