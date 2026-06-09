@@ -1,10 +1,12 @@
 import dns from "dns";
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
+// Prefer IPv4 to avoid ECONNREFUSED on IPv6 Gmail SMTP endpoints
+dns.setDefaultResultOrder("ipv4first");
 
 import express from "express";
-import dotenv from "dotenv"
-import cors from "cors"
+import dotenv from "dotenv";
+import cors from "cors";
 import connectDb from "./config/db.js";
 import cron from "node-cron";
 import { syncTrendingVideosToDB } from "./services/syncService.js";
