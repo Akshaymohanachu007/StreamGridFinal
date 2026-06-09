@@ -6,13 +6,15 @@ export const sendOTP = async (email, otp) => {
 
     host: "smtp.gmail.com",
 
-    port: 465,
+    port: 587,
 
-    secure: true,
+    secure: false,
 
-    family: 4,   // 👈 FORCE IPv4
+    family: 4,
 
-    auth: {
+    requireTLS: true,
+
+    auth:{
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
     }
@@ -32,7 +34,6 @@ export const sendOTP = async (email, otp) => {
     `
     <h2>Your OTP Code</h2>
     <h1>${otp}</h1>
-    <p>This expires in 10 minutes</p>
     `
 
   });
