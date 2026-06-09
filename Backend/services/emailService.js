@@ -1,10 +1,11 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export const sendOTP = async (email, otp) => {
+  // Lazy init — so a missing key crashes on send, not on server startup
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   const { error } = await resend.emails.send({
-    from: "StreamGrid <onboarding@resend.dev>", // use your verified domain here once set up
+    from: "StreamGrid <onboarding@resend.dev>",
     to: email,
     subject: "StreamGrid – Your Verification Code",
     html: `
