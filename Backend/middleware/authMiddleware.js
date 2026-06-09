@@ -15,7 +15,15 @@ const protect = async (req, res, next) => {
 
             req.user = await User.findById(decoded.id).select("-passwordHash");
 
-            next();
+            // Guard: user may have been deleted from DB while token still valid
+            if (!req.user) {
+                return res.status(401).json({
+                    success: false,
+                    message: "User not found",
+                });
+            }
+
+            return next();
         } catch (error) {
             return res.status(401).json({
                 success: false,
