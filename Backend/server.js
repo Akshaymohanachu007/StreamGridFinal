@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import dns from "dns";
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
@@ -5,7 +8,7 @@ dns.setServers(["8.8.8.8", "8.8.4.4"]);
 dns.setDefaultResultOrder("ipv4first");
 
 import express from "express";
-import dotenv from "dotenv";
+
 import cors from "cors";
 import connectDb from "./config/db.js";
 import cron from "node-cron";
@@ -20,13 +23,13 @@ import interactionRoutes from "./routes/interactionRoutes.js";
 import playlistRoutes from "./routes/playlistRoutes.js";
 import recommendationRoutes from "./routes/recommendationRoutes.js";
 
-dotenv.config()
+
 
 const app = express();
 
 app.use(cors({
   origin: function (origin, callback) {
-    
+
     if (!origin) return callback(null, true);
 
     const allowedOrigins = [
@@ -34,7 +37,7 @@ app.use(cors({
       "https://stream-grid-final.vercel.app",
     ];
 
-    
+
     if (
       allowedOrigins.includes(origin) ||
       /\.vercel\.app$/.test(origin)
@@ -83,11 +86,11 @@ const PORT = process.env.PORT || 5000;
 
 
 const startServer = async () => {
-  await connectDb(); 
+  await connectDb();
   app.listen(PORT, () => {
     console.log(`Server running at Port: ${PORT}`);
   });
-  
+
   syncTrendingVideosToDB();
 };
 

@@ -1,27 +1,63 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
+
 
 export const sendOTP = async (email, otp) => {
-  // Lazy init — so a missing key crashes on send, not on server startup
-  const resend = new Resend(process.env.RESEND_API_KEY);
 
-  const { error } = await resend.emails.send({
-    from: "StreamGrid <onboarding@resend.dev>",
-    to: email,
-    subject: "StreamGrid – Your Verification Code",
-    html: `
-      <div style="font-family:sans-serif;max-width:480px;margin:auto;padding:32px;background:#111;border-radius:12px;color:#fff;text-align:center">
-        <h2 style="margin-bottom:8px">StreamGrid</h2>
-        <p style="color:#aaa;margin-bottom:32px">Enter this code to verify your account</p>
-        <div style="background:#1e1e2e;border-radius:8px;padding:24px;letter-spacing:12px;font-size:40px;font-weight:bold;color:#7c3aed">
-          ${otp}
-        </div>
-        <p style="color:#aaa;font-size:13px;margin-top:24px">This code expires in <strong>10 minutes</strong>. Do not share it with anyone.</p>
-      </div>
-    `,
+
+
+
+  const transporter = nodemailer.createTransport({
+
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
+
   });
 
-  if (error) {
-    console.error("[emailService] Resend error:", error);
-    throw new Error("Failed to send verification email. Please try again later.");
-  }
+
+  await transporter.sendMail({
+
+    from: `StreamGrid <${process.env.EMAIL_USER}>`,
+
+    to: email,
+
+    subject: "StreamGrid - Your Verification Code",
+
+    html: `
+
+    <div style="
+    font-family:sans-serif;
+    text-align:center;
+    ">
+
+      <h1>StreamGrid</h1>
+
+      <p>Your verification code:</p>
+
+      <h2 style="
+      letter-spacing:10px;
+      color:#7c3aed;
+      ">
+      ${otp}
+      </h2>
+
+      <p>
+      Code expires in 10 minutes
+      </p>
+
+    </div>
+
+    `
+
+  });
+
+
+  console.log("OTP email sent");
+
+
 };
