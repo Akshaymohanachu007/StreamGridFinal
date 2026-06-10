@@ -33,7 +33,7 @@ export const syncTrendingVideosToDB = async () => {
       categoryMap[cat.slug] = category._id;
     }
 
-    
+
     await Video.deleteMany({ sourceType: "youtube" });
     console.log("Cleared existing YouTube videos to prevent orphan/broken category references.");
 
