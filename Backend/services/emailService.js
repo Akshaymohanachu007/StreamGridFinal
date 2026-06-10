@@ -1,32 +1,15 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 
 export const sendOTP = async (email, otp) => {
 
 
-  const transporter = nodemailer.createTransport({
+  const { data, error } = await resend.emails.send({
 
-    host: "smtp.gmail.com",
-
-    port: 465,
-
-    secure: true,
-
-    tls: {
-      servername: "smtp.gmail.com"
-    },
-
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-
-  });
-
-
-  await transporter.sendMail({
-
-    from: `StreamGrid <${process.env.EMAIL_USER}>`,
+    from: "StreamGrid <onboarding@resend.dev>",
 
     to: email,
 
@@ -34,17 +17,49 @@ export const sendOTP = async (email, otp) => {
 
     html: `
 
-    <h1>StreamGrid</h1>
+      <div style="
+      font-family:sans-serif;
+      text-align:center;
+      ">
 
-    <h2>${otp}</h2>
+        <h1>StreamGrid</h1>
 
-    <p>Code expires in 10 minutes</p>
+        <p>Your verification code:</p>
+
+        <h2 style="
+        letter-spacing:10px;
+        color:#7c3aed;
+        ">
+          ${otp}
+        </h2>
+
+        <p>
+        Code expires in 10 minutes
+        </p>
+
+      </div>
 
     `
 
   });
 
 
-  console.log("OTP email sent");
+  if (error) {
+
+    console.log(
+      "[Resend Error]",
+      error
+    );
+
+    throw new Error(error.message);
+
+  }
+
+
+  console.log(
+    "OTP email sent",
+    data.id
+  );
+
 
 };
