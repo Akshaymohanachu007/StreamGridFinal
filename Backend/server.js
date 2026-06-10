@@ -1,3 +1,6 @@
+import dns from "dns";
+dns.setDefaultResultOrder("ipv4first");
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -6,13 +9,13 @@ console.log(
   process.env.MONGO_URI ? "FOUND" : "MISSING"
 );
 
-import dns from "dns";
+
 
 
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 // Prefer IPv4 to avoid ECONNREFUSED on IPv6 Gmail SMTP endpoints
-dns.setDefaultResultOrder("ipv4first");
+
 
 import express from "express";
 
@@ -33,6 +36,12 @@ import recommendationRoutes from "./routes/recommendationRoutes.js";
 
 
 const app = express();
+
+app.get("/railway-test", (req, res) => {
+
+  res.send("Railway running latest backend");
+
+});
 
 app.use(cors({
   origin: function (origin, callback) {
