@@ -1,7 +1,14 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+console.log(
+  "Mongo:",
+  process.env.MONGO_URI ? "FOUND" : "MISSING"
+);
+
 import dns from "dns";
+
+
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 // Prefer IPv4 to avoid ECONNREFUSED on IPv6 Gmail SMTP endpoints
