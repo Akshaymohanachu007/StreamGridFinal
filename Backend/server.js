@@ -9,6 +9,10 @@ console.log(
   process.env.MONGO_URI ? "FOUND" : "MISSING"
 );
 
+console.log(
+  "RESEND:",
+  process.env.RESEND_API_KEY ? "FOUND" : "MISSING"
+);
 
 
 
