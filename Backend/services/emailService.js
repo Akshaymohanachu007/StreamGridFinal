@@ -3,22 +3,21 @@ import nodemailer from "nodemailer";
 
 export const sendOTP = async (email, otp) => {
 
+
   const transporter = nodemailer.createTransport({
 
     host: "smtp.gmail.com",
 
-    port: 587,
+    port: 465,
 
-    secure: false,
+    secure: true,
+
+    family: 4,   // force IPv4
 
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
-    },
-
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000
+    }
 
   });
 
@@ -38,18 +37,18 @@ export const sendOTP = async (email, otp) => {
       text-align:center;
       ">
 
-        <h1>StreamGrid</h1>
+      <h1>StreamGrid</h1>
 
-        <p>Your verification code:</p>
+      <p>Your verification code:</p>
 
-        <h2 style="
-        letter-spacing:10px;
-        color:#7c3aed;
-        ">
-        ${otp}
-        </h2>
+      <h2 style="
+      letter-spacing:10px;
+      color:#7c3aed;
+      ">
+      ${otp}
+      </h2>
 
-        <p>Code expires in 10 minutes</p>
+      <p>Code expires in 10 minutes</p>
 
       </div>
 
@@ -59,5 +58,6 @@ export const sendOTP = async (email, otp) => {
 
 
   console.log("OTP email sent");
+
 
 };
