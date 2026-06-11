@@ -28,7 +28,7 @@ export const updateUserPattern =
         }
 
 
-        
+
 
         pref.categories.push({
 
@@ -39,7 +39,7 @@ export const updateUserPattern =
         });
 
 
-        
+
 
         video.tags.forEach(tag => {
 

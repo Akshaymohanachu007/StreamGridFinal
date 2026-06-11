@@ -11,7 +11,7 @@ export const sendOTP = async (email, otp) => {
 
   const { data, error } = await resend.emails.send({
 
-    from: "StreamGrid <onboarding@resend.dev>",
+    from: "StreamGrid <noreply@streamgrid.site>",
 
     to: email,
 
